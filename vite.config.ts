@@ -5,6 +5,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  base: '/site-cadastro-gci/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '.'),
