@@ -8,9 +8,14 @@ import { HowItWorks } from './components/HowItWorks';
 import { CallToAction } from './components/CallToAction';
 import { Footer } from './components/Footer';
 import { RegistrationFlow } from './components/RegistrationFlow';
+import { Login } from './components/Login';
+import { Dashboard } from './components/Dashboard';
 import { AnimatePresence } from 'motion/react';
 
+type ViewState = 'landing' | 'login' | 'dashboard';
+
 export default function App() {
+  const [currentView, setCurrentView] = useState<ViewState>('landing');
   const [isRegistering, setIsRegistering] = useState(false);
   const [registrationType, setRegistrationType] = useState<'CPF' | 'CNPJ'>('CNPJ');
   const [initialDocument, setInitialDocument] = useState('');
@@ -21,9 +26,20 @@ export default function App() {
     setIsRegistering(true);
   };
 
+  if (currentView === 'login') {
+    return <Login onBack={() => setCurrentView('landing')} onLogin={() => setCurrentView('dashboard')} />;
+  }
+
+  if (currentView === 'dashboard') {
+    return <Dashboard onLogout={() => setCurrentView('landing')} />;
+  }
+
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-gci/10 selection:text-gci">
-      <Navbar onOpenRegistration={() => openRegistration('CNPJ')} />
+      <Navbar
+        onOpenRegistration={() => openRegistration('CNPJ')}
+        onLoginClick={() => setCurrentView('login')}
+      />
       <main>
         <Hero onOpenRegistration={openRegistration} />
         <Solutions />

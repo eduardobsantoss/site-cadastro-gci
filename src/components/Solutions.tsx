@@ -4,6 +4,7 @@ import { TrendingUp, Landmark, ShieldCheck } from 'lucide-react';
 
 const solutions = [
   {
+    id: 'funding-agro',
     category: 'PARA EMPRESAS',
     title: <>Funding para o <span className="text-agro-orange">Agro</span></>,
     description: 'Soluções de crédito customizadas para transformar necessidades financeiras em oportunidades reais de crescimento no campo.',
@@ -11,6 +12,7 @@ const solutions = [
     variant: 'dark',
   },
   {
+    id: 'conta-investimentos',
     category: 'PARA PF E PJ',
     title: 'Conta e Investimentos',
     description: 'Gestão e rentabilização de caixa com serviços que organizam suas finanças e fazem seu dinheiro trabalhar por você.',
@@ -18,6 +20,7 @@ const solutions = [
     variant: 'light',
   },
   {
+    id: 'protecao-patrimonial',
     category: 'PROTEÇÃO',
     title: 'Proteção Patrimonial',
     description: 'Estratégias inteligentes que minimizam riscos no patrimônio pessoal e empresarial com seguros sob medida.',
@@ -43,7 +46,7 @@ export const Solutions = () => {
         <div className="grid md:grid-cols-3 gap-8">
           {solutions.map((item, index) => (
             <motion.div
-              key={item.title}
+              key={item.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

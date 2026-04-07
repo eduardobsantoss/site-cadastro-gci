@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { 
+import {
   X,
-  ArrowLeft, 
-  ChevronRight, 
-  CheckCircle2, 
-  User, 
-  Building2, 
-  Mail, 
-  Phone, 
-  MapPin, 
-  Upload, 
-  ShieldCheck, 
-  Clock, 
-  Briefcase, 
-  FileText, 
+  ArrowLeft,
+  ChevronRight,
+  CheckCircle2,
+  User,
+  Building2,
+  Mail,
+  Phone,
+  MapPin,
+  Upload,
+  ShieldCheck,
+  Clock,
+  Briefcase,
+  FileText,
   Check,
   Lock
 } from 'lucide-react';
@@ -27,12 +27,11 @@ interface RegistrationFlowProps {
   onClose: () => void;
 }
 
-type Step = 'TIPO' | 'CADASTRO' | 'DOCUMENTOS' | 'SERVICOS' | 'TERMOS' | 'CONFIRMACAO';
+type Step = 'TIPO' | 'CADASTRO' | 'SERVICOS' | 'TERMOS' | 'CONFIRMACAO';
 
 const STEPS: { id: Step; label: string; icon: any }[] = [
   { id: 'TIPO', label: 'Tipo', icon: User },
   { id: 'CADASTRO', label: 'Cadastro', icon: FileText },
-  { id: 'DOCUMENTOS', label: 'Documentos', icon: Upload },
   { id: 'SERVICOS', label: 'Serviços', icon: Briefcase },
   { id: 'TERMOS', label: 'Termos', icon: ShieldCheck },
   { id: 'CONFIRMACAO', label: 'Confirmação', icon: CheckCircle2 },
@@ -188,7 +187,7 @@ export const RegistrationFlow = ({ initialType = 'CNPJ', initialDocument = '', o
                   onChange={(e) => setFormData({ ...formData, document: e.target.value })}
                 />
               </div>
-              
+
               {type === 'CNPJ' && (
                 <>
                   <div className="space-y-2">
@@ -244,48 +243,6 @@ export const RegistrationFlow = ({ initialType = 'CNPJ', initialDocument = '', o
                   onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                 />
               </div>
-            </div>
-          </motion.div>
-        );
-
-      case 'DOCUMENTOS':
-        return (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="space-y-8"
-          >
-            <div className="text-center space-y-2">
-              <h2 className="text-3xl md:text-4xl font-black text-gci tracking-tighter">Documentos</h2>
-              <p className="text-gray-500 text-lg md:text-xl font-medium">Envie os documentos obrigatórios para análise</p>
-            </div>
-
-            <div className="space-y-6 pt-4">
-              {(type === 'CNPJ' ? [
-                'Contrato Social',
-                'Comprovante de Endereço da Empresa',
-                'Documento do Representante Legal',
-                'Balanço Patrimonial Assinado',
-                'DRE — Demonstração do Resultado do Exercício'
-              ] : [
-                'Documento de Identidade (RG/CNH)',
-                'Comprovante de Endereço',
-                'Comprovante de Renda (opcional)'
-              ]).map((docLabel) => (
-                <div key={docLabel} className="space-y-2">
-                  <label className="text-xs font-black text-gci ml-2 uppercase tracking-widest">{docLabel}</label>
-                  <div className="border-2 border-dashed border-gray-200 rounded-2xl p-8 flex flex-col items-center justify-center gap-4 bg-gray-50/50 hover:bg-gray-50 hover:border-gci/30 transition-all cursor-pointer group shadow-sm">
-                    <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-gray-400 group-hover:text-gci transition-colors shadow-md">
-                      <Upload size={24} />
-                    </div>
-                    <div className="text-center">
-                      <p className="text-lg font-bold text-gci">Arraste ou clique para enviar</p>
-                      <p className="text-sm text-gray-400 mt-1">PDF, JPG ou PNG</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
             </div>
           </motion.div>
         );
@@ -420,7 +377,7 @@ export const RegistrationFlow = ({ initialType = 'CNPJ', initialDocument = '', o
                       <div className={cn(
                         "w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all shadow-sm",
                         formData.scrAuthorized ? "bg-gci border-gci text-white" : "border-gray-300 group-hover:border-gci"
-                    )}>
+                      )}>
                         {formData.scrAuthorized && <Check size={16} />}
                       </div>
                     </div>
@@ -443,8 +400,8 @@ export const RegistrationFlow = ({ initialType = 'CNPJ', initialDocument = '', o
               <CheckCircle2 size={40} />
             </div>
             <div className="space-y-4">
-              <h2 className="text-3xl md:text-4xl font-black text-gci tracking-tighter">Cadastro Concluído!</h2>
-              <p className="text-gray-500 text-lg md:text-xl font-medium">Obrigado por se cadastrar no GCI. Nossa equipe entrará em contato em até 48h úteis.</p>
+              <h2 className="text-3xl md:text-4xl font-black text-gci tracking-tighter">Obrigado!</h2>
+              <p className="text-gray-500 text-lg md:text-xl font-medium">Estamos validando seus dados. Em breve você receberá um e-mail com seu usuário e senha de acesso.</p>
             </div>
 
             <div className="bg-gray-50 rounded-3xl p-8 text-left space-y-8 border-2 border-gray-100 shadow-sm">
@@ -486,7 +443,7 @@ export const RegistrationFlow = ({ initialType = 'CNPJ', initialDocument = '', o
             <div className="bg-gci/5 border-2 border-gci/10 rounded-2xl p-6 text-left shadow-sm">
               <h4 className="text-lg font-black text-gci mb-1">Próximos passos</h4>
               <p className="text-sm text-gray-500 leading-relaxed font-medium">
-                Um consultor GCI entrará em contato para finalizar seu cadastro e apresentar as melhores soluções para seu perfil.
+                Fique de olho na sua caixa de entrada (e no spam). Assim que a validação for concluída, enviaremos as instruções de acesso.
               </p>
             </div>
           </motion.div>
@@ -509,7 +466,7 @@ export const RegistrationFlow = ({ initialType = 'CNPJ', initialDocument = '', o
           <p className="text-white/70 text-base leading-relaxed mb-10">
             Preencha os dados ao lado para que possamos entender seu perfil e oferecer as melhores soluções financeiras para o seu negócio.
           </p>
-          
+
           <div className="space-y-6">
             <div className="flex items-start gap-4">
               <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center shrink-0">
@@ -541,7 +498,7 @@ export const RegistrationFlow = ({ initialType = 'CNPJ', initialDocument = '', o
       <div className="flex-1 flex flex-col bg-white relative h-full overflow-hidden">
         {/* Close Button - Fixed at top right */}
         <div className="absolute top-4 right-4 md:top-8 md:right-8 z-30">
-          <button 
+          <button
             onClick={onClose}
             className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gci transition-all shadow-sm"
             title="Fechar"
@@ -575,13 +532,13 @@ export const RegistrationFlow = ({ initialType = 'CNPJ', initialDocument = '', o
                     Ambiente seguro
                   </div>
                 </div>
-                
+
                 {/* Step Icons / Flowchart */}
                 <div className="flex justify-between items-center relative pt-1">
                   {/* Progress Line Background */}
                   <div className="absolute top-5 left-0 w-full h-[2px] bg-gray-100 -z-10 rounded-full" />
                   {/* Active Progress Line */}
-                  <motion.div 
+                  <motion.div
                     className="absolute top-5 left-0 h-[2px] bg-gci -z-10 rounded-full"
                     initial={{ width: '0%' }}
                     animate={{
@@ -597,8 +554,8 @@ export const RegistrationFlow = ({ initialType = 'CNPJ', initialDocument = '', o
                       <div key={s.id} className="flex flex-col items-center gap-2 bg-white px-2">
                         <div className={cn(
                           "w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 border-2",
-                          isActive ? "bg-gci border-gci text-white scale-110 shadow-lg shadow-gci/20" : 
-                          isCompleted ? "bg-white border-gci text-gci" : "bg-white border-gray-100 text-gray-300"
+                          isActive ? "bg-gci border-gci text-white scale-110 shadow-lg shadow-gci/20" :
+                            isCompleted ? "bg-white border-gci text-gci" : "bg-white border-gray-100 text-gray-300"
                         )}>
                           {isCompleted ? <Check size={18} strokeWidth={3} /> : <s.icon size={18} />}
                         </div>
@@ -651,7 +608,8 @@ export const RegistrationFlow = ({ initialType = 'CNPJ', initialDocument = '', o
         </div>
       </div>
 
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .custom-scrollbar::-webkit-scrollbar {
           width: 6px;
         }

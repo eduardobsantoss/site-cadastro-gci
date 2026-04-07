@@ -5,9 +5,10 @@ import { Logo } from './Logo';
 
 interface NavbarProps {
   onOpenRegistration: () => void;
+  onLoginClick: () => void;
 }
 
-export const Navbar = ({ onOpenRegistration }: NavbarProps) => {
+export const Navbar = ({ onOpenRegistration, onLoginClick }: NavbarProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navItems = [
@@ -74,6 +75,7 @@ export const Navbar = ({ onOpenRegistration }: NavbarProps) => {
 
         <div className="hidden md:flex items-center gap-4">
           <button
+            onClick={onLoginClick}
             className={cn(
               'text-[14px] font-semibold px-5 py-2.5 rounded-full border transition-colors',
               isScrolled
@@ -119,6 +121,10 @@ export const Navbar = ({ onOpenRegistration }: NavbarProps) => {
             </button>
           ))}
           <button
+            onClick={() => {
+              onLoginClick();
+              setIsMobileMenuOpen(false);
+            }}
             className="border border-gci/25 text-gci py-4 rounded-full font-semibold text-lg"
           >
             Acesse sua conta
